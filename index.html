@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Guniputi Pujith — AI & ML Student Portfolio</title>
+<meta name="description" content="Portfolio of Guniputi Pujith — Aspiring AI & ML Engineer, B.Tech CSE-AIML student. Projects, skills, certifications and contact." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+
+/* === Design tokens === */
+:root {
+  --bg: #0a0a14;
+  --bg-2: #0f0f1e;
+  --surface: rgba(255,255,255,0.04);
+  --surface-2: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.10);
+  --fg: #e8ecf5;
+  --muted: #9aa3b8;
+  --primary: #22d3ee;     /* cyan */
+  --primary-2: #a78bfa;   /* purple */
+  --accent: #f472b6;      /* pink */
+  --radius: 16px;
+  --radius-lg: 22px;
+  --shadow-glow: 0 10px 40px -10px rgba(34,211,238,0.45);
+  --shadow-card: 0 20px 60px -20px rgba(0,0,0,0.6);
+  --gradient-primary: linear-gradient(135deg, #22d3ee 0%, #a78bfa 100%);
+  --gradient-accent:  linear-gradient(135deg, #a78bfa 0%, #f472b6 100%);
+  --gradient-text:    linear-gradient(135deg, #22d3ee 0%, #a78bfa 60%, #f472b6 100%);
+  --font: 'Outfit', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+/* === Base === */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: radial-gradient(1200px 600px at 80% -10%, rgba(167,139,250,0.18), transparent 60%),
+              radial-gradient(900px 500px at -10% 20%, rgba(34,211,238,0.18), transparent 55%),
+              var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+.container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+/* === Utilities === */
+.text-gradient {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+.eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+.center { text-align: center; }
+.divider { display: inline-block; width: 48px; height: 1px; background: var(--border); margin: 0 8px; }
+.divider-line { height: 1px; background: var(--border); margin: 14px 0 10px; }
+.row-between { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.accent { color: var(--primary); }
+
+/* === Glass / Borders === */
+.glass {
+  background: var(--surface);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.gradient-border {
+  position: relative;
+  background: linear-gradient(var(--bg-2), var(--bg-2)) padding-box,
+              var(--gradient-primary) border-box;
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.gradient-border:hover { box-shadow: var(--shadow-glow); }
+
+/* === Buttons === */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 22px; border-radius: 14px; font-weight: 500;
+  font-size: 14px; cursor: pointer; border: 1px solid transparent;
+  transition: opacity .2s ease, transform .2s ease, background .2s ease;
+}
+.btn-sm { padding: 8px 14px; font-size: 12px; border-radius: 10px; }
+.btn-primary {
+  background: var(--gradient-primary);
+  color: #0b0b14;
+  box-shadow: var(--shadow-glow);
+}
+.btn-primary:hover { opacity: 0.92; }
+.btn-glass {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--fg);
+}
+.btn-glass:hover { background: var(--surface-2); }
+.icon-btn {
+  display: grid; place-items: center;
+  height: 42px; width: 42px; border-radius: 12px;
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--muted); font-size: 13px; font-weight: 600;
+  transition: color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.icon-btn:hover { color: var(--primary); box-shadow: var(--shadow-glow); }
+
+/* === Navbar === */
+.navbar {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: blur(18px);
+  background: rgba(10,10,20,0.65);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; }
+.brand-badge {
+  display: grid; place-items: center; height: 34px; width: 34px;
+  background: var(--gradient-primary); color: #0b0b14;
+  border-radius: 10px; font-weight: 800; font-size: 13px;
+  box-shadow: var(--shadow-glow);
+}
+.nav-links { display: flex; gap: 26px; }
+.nav-links a { font-size: 14px; color: var(--muted); transition: color .2s ease; }
+.nav-links a:hover { color: var(--primary); }
+@media (max-width: 760px) { .nav-links { display: none; } }
+
+/* === Hero === */
+.hero { position: relative; padding: 120px 0 100px; overflow: hidden; }
+.bg-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(600px 400px at 70% 20%, rgba(34,211,238,0.18), transparent 60%);
+  z-index: -2;
+}
+.grid-pattern {
+  position: absolute; inset: 0; opacity: 0.35; z-index: -1;
+  background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+}
+.hero-grid {
+  display: grid; gap: 60px;
+  grid-template-columns: 1.2fr 1fr; align-items: center;
+}
+@media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; } }
+
+.chip {
+  display: inline-flex; gap: 8px; align-items: center;
+  padding: 6px 14px; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--border);
+  font-size: 12px; color: var(--muted); margin-bottom: 22px;
+}
+.display { font-size: clamp(40px, 6vw, 76px); line-height: 1.05; font-weight: 700; margin: 0; letter-spacing: -0.02em; }
+.lede { font-size: clamp(16px, 1.6vw, 20px); color: var(--muted); margin-top: 22px; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.social-row { display: flex; align-items: center; gap: 10px; margin-top: 28px; }
+
+/* Portrait */
+.portrait-wrap { position: relative; max-width: 440px; margin: 0 auto; }
+.portrait-glow {
+  position: absolute; inset: -18px;
+  background: var(--gradient-primary); opacity: 0.3;
+  filter: blur(40px); border-radius: 32px; z-index: -1;
+  animation: pulse 4s ease-in-out infinite;
+}
+.portrait-frame { padding: 8px; }
+.portrait-frame img { aspect-ratio: 1/1; width: 100%; object-fit: cover; border-radius: 16px; }
+.float-badge {
+  position: absolute; padding: 12px 16px; border-radius: 16px;
+  background: rgba(15,15,30,0.85); backdrop-filter: blur(16px);
+  border: 1px solid var(--border); box-shadow: var(--shadow-card);
+  animation: float 4s ease-in-out infinite;
+}
+.float-badge.top-left { top: -16px; left: -16px; }
+.float-badge.bottom-right { bottom: -16px; right: -16px; animation-delay: 1.5s; }
+.badge-value { font-size: 26px; font-weight: 700; }
+.badge-value.sm { font-size: 15px; }
+
+/* === Sections === */
+.section { padding: 90px 0; }
+.section-title {
+  font-size: clamp(28px, 4vw, 44px); text-align: center;
+  font-weight: 700; letter-spacing: -0.02em; margin: 10px 0 50px;
+}
+.eyebrow.center { text-align: center; display: block; }
+.card { padding: 22px; }
+
+/* About */
+.about-grid {
+  display: grid; gap: 22px;
+  grid-template-columns: 1.4fr 1fr;
+}
+@media (max-width: 800px) { .about-grid { grid-template-columns: 1fr; } }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.stat {
+  text-align: center; padding: 22px 10px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+}
+.stat-value { font-size: 28px; font-weight: 700; }
+
+/* Timeline */
+.timeline {
+  display: grid; gap: 18px; max-width: 720px; margin: 0 auto;
+  border-left: 1px solid var(--border); padding-left: 28px; position: relative;
+}
+.timeline-item {
+  padding: 20px; border-radius: var(--radius);
+  background: var(--surface); border: 1px solid var(--border); position: relative;
+}
+.timeline-item::before {
+  content: ""; position: absolute; left: -36px; top: 26px;
+  height: 12px; width: 12px; border-radius: 50%;
+  background: var(--gradient-primary); box-shadow: var(--shadow-glow);
+}
+.timeline-item h3 { margin: 0 0 4px; font-size: 17px; }
+
+/* Skills */
+.skills-grid {
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+}
+.skill { text-align: center; font-weight: 500; padding: 18px; transition: box-shadow .2s ease, transform .2s ease; }
+.skill:hover { box-shadow: var(--shadow-glow); transform: translateY(-2px); }
+
+/* Projects */
+.projects-grid { display: grid; gap: 22px; grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 860px) { .projects-grid { grid-template-columns: 1fr; } }
+.project-card { padding: 28px; }
+.project-card h3 { font-size: 22px; margin: 0 0 10px; }
+.feature-list { list-style: none; padding: 0; margin: 18px 0; display: grid; gap: 8px; }
+.feature-list li { position: relative; padding-left: 18px; font-size: 14px; }
+.feature-list li::before {
+  content: ""; position: absolute; left: 0; top: 9px;
+  height: 6px; width: 6px; border-radius: 50%;
+  background: var(--primary); box-shadow: 0 0 10px var(--primary);
+}
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
+.tag {
+  font-size: 11px; padding: 4px 10px; border-radius: 6px;
+  background: var(--surface); border: 1px solid var(--border); color: var(--muted);
+}
+.project-card:hover { transform: translateY(-4px); }
+
+.icon-tile {
+  display: grid; place-items: center; height: 46px; width: 46px;
+  border-radius: 12px; background: var(--gradient-primary); color: #0b0b14;
+  font-weight: 700; box-shadow: var(--shadow-glow);
+}
+.icon-tile.sm { height: 36px; width: 36px; border-radius: 10px; }
+
+/* Certifications */
+.cert-grid { display: grid; gap: 22px; grid-template-columns: 1fr 1.4fr; }
+@media (max-width: 900px) { .cert-grid { grid-template-columns: 1fr; } }
+.cert-col { display: grid; gap: 14px; }
+.cert-card {
+  display: flex; align-items: center; gap: 16px; padding: 18px;
+}
+.cert-title { font-weight: 600; color: var(--fg); }
+.achievements-grid { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 700px) { .achievements-grid { grid-template-columns: 1fr; } }
+
+/* Coding cards */
+.coding-grid { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 800px) { .coding-grid { grid-template-columns: 1fr; } }
+.code-card { padding: 24px; display: block; }
+.code-card:hover { transform: translateY(-4px); }
+
+/* Contact */
+.contact-grid { display: grid; gap: 28px; grid-template-columns: 1fr 1.2fr; margin-top: 24px; }
+@media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+.contact-col { display: grid; gap: 14px; }
+.contact-item {
+  display: flex; align-items: center; gap: 14px; padding: 18px;
+  border-radius: var(--radius-lg);
+}
+.contact-item.glass { background: var(--surface); }
+
+.contact-form { padding: 28px; display: grid; gap: 16px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+.contact-form label {
+  display: grid; gap: 6px;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+}
+.contact-form input, .contact-form textarea {
+  font-family: inherit; font-size: 14px; color: var(--fg);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border); border-radius: 12px;
+  padding: 12px 14px; outline: none; resize: none;
+  letter-spacing: normal; text-transform: none;
+}
+.contact-form input:focus, .contact-form textarea:focus {
+  border-color: var(--primary); box-shadow: 0 0 0 3px rgba(34,211,238,0.18);
+}
+.contact-form button { justify-self: start; }
+
+/* Footer */
+.footer { border-top: 1px solid var(--border); padding: 48px 0 32px; margin-top: 40px; }
+.footer-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 32px; align-items: start; }
+.footer-nav { display: flex; gap: 22px; justify-content: center; }
+.footer-nav a { color: var(--muted); font-size: 14px; }
+.footer-nav a:hover { color: var(--primary); }
+.footer-socials { display: flex; gap: 10px; justify-content: flex-end; }
+.footer-bottom {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;
+  margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--border);
+  color: var(--muted); font-size: 12px;
+}
+@media (max-width: 760px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-nav, .footer-socials { justify-content: flex-start; }
+}
+
+/* === Animations === */
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.55; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp .8s ease both; }
+.fade-up.delay { animation-delay: .15s; }
+
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+  <div class="container nav-inner">
+    <a href="#home" class="brand">
+      <span class="brand-badge">GP</span>
+      <span>Pujith<span class="accent">.</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="btn btn-primary btn-sm">Hire Me</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section id="home" class="hero">
+  <div class="bg-glow"></div>
+  <div class="grid-pattern"></div>
+  <div class="container hero-grid">
+    <div class="fade-up">
+      <div class="chip">✦ Available for Internships & Collaborations</div>
+      <h1 class="display">Hi, I'm <span class="text-gradient">Guniputi Pujith</span></h1>
+      <p class="lede">AI &amp; ML Student · Aspiring Software Developer · Problem Solver</p>
+      <p class="muted">Motivated upcoming third-year B.Tech student specializing in Artificial Intelligence &amp; Machine Learning. I love building software, training models, and turning real-world problems into elegant AI solutions.</p>
+      <div class="cta-row">
+        <a href="#projects" class="btn btn-primary">View Projects →</a>
+        <a href="#contact" class="btn btn-glass">✉ Contact Me</a>
+      </div>
+      <div class="social-row">
+        <a href="https://github.com/GuniputiPujith" target="_blank" rel="noreferrer" class="icon-btn" aria-label="GitHub">GH</a>
+        <a href="https://www.linkedin.com/in/guniputi-pujith-47453b40b" target="_blank" rel="noreferrer" class="icon-btn" aria-label="LinkedIn">in</a>
+        <span class="divider"></span>
+        <span class="eyebrow">Connect</span>
+      </div>
+    </div>
+    <div class="portrait-wrap fade-up delay">
+      <div class="portrait-glow"></div>
+      <div class="gradient-border portrait-frame">
+        <img src="assets/pujith-portrait.jpg" alt="Guniputi Pujith portrait" />
+      </div>
+      <div class="float-badge top-left">
+        <div class="eyebrow">CGPA</div>
+        <div class="badge-value text-gradient">7.28</div>
+      </div>
+      <div class="float-badge bottom-right">
+        <div class="eyebrow">Focus</div>
+        <div class="badge-value sm">AI / ML</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="section">
+  <div class="container">
+    <p class="eyebrow center">About</p>
+    <h2 class="section-title">A bit about <span class="text-gradient">me</span>.</h2>
+    <div class="about-grid">
+      <div class="glass card">
+        <p>I'm a passionate B.Tech student specializing in Computer Science with AI & ML at Vignan's Foundation for Science, Technology & Research. I enjoy crafting intelligent software, exploring data, and building end-to-end ML solutions.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="stat-value text-gradient">2</div><div class="eyebrow">Projects</div></div>
+        <div class="stat"><div class="stat-value text-gradient">7.28</div><div class="eyebrow">CGPA</div></div>
+        <div class="stat"><div class="stat-value text-gradient">2+</div><div class="eyebrow">Certifications</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section id="education" class="section">
+  <div class="container">
+    <p class="eyebrow center">Education</p>
+    <h2 class="section-title">Academic <span class="text-gradient">journey</span>.</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>B.Tech — CSE (AI & ML)</h3>
+        <p class="muted">Vignan's Foundation for Science, Technology & Research · CGPA 7.28</p>
+      </div>
+      <div class="timeline-item">
+        <h3>Intermediate (MPC)</h3>
+        <p class="muted">Sri Chaitanya Junior College</p>
+      </div>
+      <div class="timeline-item">
+        <h3>SSC</h3>
+        <p class="muted">Bhashyam High School</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills" class="section">
+  <div class="container">
+    <p class="eyebrow center">Skills</p>
+    <h2 class="section-title">Tools I <span class="text-gradient">work with</span>.</h2>
+    <div class="skills-grid">
+      <div class="glass card skill">Python</div>
+      <div class="glass card skill">Java</div>
+      <div class="glass card skill">Machine Learning</div>
+      <div class="glass card skill">Deep Learning</div>
+      <div class="glass card skill">OpenCV</div>
+      <div class="glass card skill">TensorFlow</div>
+      <div class="glass card skill">Scikit-learn</div>
+      <div class="glass card skill">Pandas / NumPy</div>
+      <div class="glass card skill">SQL</div>
+      <div class="glass card skill">HTML / CSS</div>
+      <div class="glass card skill">Git & GitHub</div>
+      <div class="glass card skill">Problem Solving</div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects" class="section">
+  <div class="container">
+    <p class="eyebrow center">Projects</p>
+    <h2 class="section-title">Selected <span class="text-gradient">work</span>.</h2>
+    <div class="projects-grid">
+      <article class="gradient-border project-card">
+        <div class="row-between">
+          <div class="icon-tile">📱</div>
+          <span class="eyebrow">Machine Learning</span>
+        </div>
+        <h3>Mobile Recommender System</h3>
+        <p class="muted">A machine learning recommendation engine that suggests mobile phones based on user preferences, budgets and feature priorities.</p>
+        <ul class="feature-list">
+          <li>Recommendation engine</li>
+          <li>User-friendly UI</li>
+          <li>ML-powered filtering</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">Pandas</span><span class="tag">Streamlit</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-sm" href="https://mobile-recommendor-system-4.onrender.com/" target="_blank" rel="noreferrer">↗ Live</a>
+          <a class="btn btn-glass btn-sm" href="https://github.com/GuniputiPujith" target="_blank" rel="noreferrer">GH Code</a>
+        </div>
+      </article>
+
+      <article class="gradient-border project-card">
+        <div class="row-between">
+          <div class="icon-tile">🛡</div>
+          <span class="eyebrow">Computer Vision · AI</span>
+        </div>
+        <h3>AI Proctored Examination System</h3>
+        <p class="muted">AI-powered online exam monitoring that detects suspicious activity in real-time using computer vision and behavioral analysis.</p>
+        <ul class="feature-list">
+          <li>AI monitoring</li>
+          <li>Fraud detection</li>
+          <li>Real-time tracking</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">TensorFlow</span><span class="tag">Flask</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-sm" href="https://ai-proctored-examination-system.onrender.com" target="_blank" rel="noreferrer">↗ Live</a>
+          <a class="btn btn-glass btn-sm" href="https://github.com/GuniputiPujith" target="_blank" rel="noreferrer">GH Code</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Certifications -->
+<section id="certifications" class="section">
+  <div class="container">
+    <p class="eyebrow center">Certifications & Achievements</p>
+    <h2 class="section-title">Milestones &amp; <span class="text-gradient">credentials</span>.</h2>
+    <div class="cert-grid">
+      <div class="cert-col">
+        <a class="gradient-border cert-card" href="https://www.hackerrank.com/certificates/iframe/88a54ca2f802" target="_blank" rel="noreferrer">
+          <div class="icon-tile">🏅</div>
+          <div><div class="cert-title">Python Programming</div><div class="muted small">HackerRank</div></div>
+        </a>
+        <a class="gradient-border cert-card" href="https://www.hackerrank.com/certificates/iframe/e71307dfa64d" target="_blank" rel="noreferrer">
+          <div class="icon-tile">🏅</div>
+          <div><div class="cert-title">Problem Solving</div><div class="muted small">HackerRank</div></div>
+        </a>
+      </div>
+      <div class="achievements-grid">
+        <div class="glass card">
+          <div class="icon-tile sm">🏆</div>
+          <div class="cert-title">Coding Competitions</div>
+          <p class="muted small">Participated in coding competitions and technical workshops.</p>
+        </div>
+        <div class="glass card">
+          <div class="icon-tile sm">✨</div>
+          <div class="cert-title">Hands-on AI/ML</div>
+          <p class="muted small">Completed multiple AI/ML hands-on projects end-to-end.</p>
+        </div>
+        <div class="glass card">
+          <div class="icon-tile sm">📘</div>
+          <div class="cert-title">Practical Expertise</div>
+          <p class="muted small">Developed working knowledge of core machine learning concepts.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Coding profiles -->
+<section id="coding" class="section">
+  <div class="container">
+    <p class="eyebrow center">Coding Profiles</p>
+    <h2 class="section-title">Where I <span class="text-gradient">practice</span> &amp; ship.</h2>
+    <div class="coding-grid">
+      <a class="gradient-border code-card" href="https://leetcode.com/u/guniputipujith/" target="_blank" rel="noreferrer">
+        <div class="row-between"><div class="icon-tile">{ }</div><span class="eyebrow">Visit →</span></div>
+        <div class="cert-title">LeetCode</div><div class="muted small">@guniputipujith</div>
+        <div class="divider-line"></div>
+        <div class="eyebrow">Problems Solved</div>
+      </a>
+      <a class="gradient-border code-card" href="https://www.hackerrank.com/profile/guniputipujith" target="_blank" rel="noreferrer">
+        <div class="row-between"><div class="icon-tile">&gt;_</div><span class="eyebrow">Visit →</span></div>
+        <div class="cert-title">HackerRank</div><div class="muted small">@guniputipujith</div>
+        <div class="divider-line"></div>
+        <div class="eyebrow">Badges Earned</div>
+      </a>
+      <a class="gradient-border code-card" href="https://github.com/GuniputiPujith" target="_blank" rel="noreferrer">
+        <div class="row-between"><div class="icon-tile">GH</div><span class="eyebrow">Visit →</span></div>
+        <div class="cert-title">GitHub</div><div class="muted small">@GuniputiPujith</div>
+        <div class="divider-line"></div>
+        <div class="eyebrow">Public Repos</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section">
+  <div class="container">
+    <p class="eyebrow center">Contact</p>
+    <h2 class="section-title">Let's <span class="text-gradient">build</span> something.</h2>
+    <p class="center muted">Open to internships, collaborations, and exciting AI/ML opportunities.</p>
+    <div class="contact-grid">
+      <div class="contact-col">
+        <a class="gradient-border contact-item" href="mailto:guniputipujith@gmail.com">
+          <div class="icon-tile">✉</div>
+          <div><div class="eyebrow">Email</div><div class="cert-title">guniputipujith@gmail.com</div></div>
+        </a>
+        <a class="gradient-border contact-item" href="https://github.com/GuniputiPujith" target="_blank" rel="noreferrer">
+          <div class="icon-tile">GH</div>
+          <div><div class="eyebrow">GitHub</div><div class="cert-title">github.com/GuniputiPujith</div></div>
+        </a>
+        <a class="gradient-border contact-item" href="https://www.linkedin.com/in/guniputi-pujith-47453b40b" target="_blank" rel="noreferrer">
+          <div class="icon-tile">in</div>
+          <div><div class="eyebrow">LinkedIn</div><div class="cert-title">linkedin.com/in/guniputi-pujith</div></div>
+        </a>
+        <div class="glass contact-item">
+          <div class="icon-tile">📍</div>
+          <div><div class="eyebrow">Based in</div><div class="cert-title">India</div></div>
+        </div>
+      </div>
+      <form class="gradient-border contact-form" onsubmit="event.preventDefault(); this.reset(); this.querySelector('button').textContent='Sent — thanks!';">
+        <div class="form-row">
+          <label>Your Name<input required type="text" placeholder="Jane Doe"/></label>
+          <label>Email<input required type="email" placeholder="you@email.com"/></label>
+        </div>
+        <label>Subject<input required type="text" placeholder="Internship opportunity"/></label>
+        <label>Message<textarea required rows="5" placeholder="Tell me a bit about your project or role..."></textarea></label>
+        <button type="submit" class="btn btn-primary">Send Message ➤</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="brand"><span class="brand-badge">GP</span><span>Pujith<span class="accent">.</span></span></div>
+      <p class="muted small">AI &amp; ML student crafting intelligent, useful software.</p>
+    </div>
+    <nav class="footer-nav">
+      <a href="#about">About</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+    </nav>
+    <div class="footer-socials">
+      <a href="https://github.com/GuniputiPujith" target="_blank" rel="noreferrer" class="icon-btn">GH</a>
+      <a href="https://www.linkedin.com/in/guniputi-pujith-47453b40b" target="_blank" rel="noreferrer" class="icon-btn">in</a>
+      <a href="mailto:guniputipujith@gmail.com" class="icon-btn">✉</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© <span id="year"></span> Guniputi Pujith. All rights reserved.</span>
+    <span>Built with passion using modern web technologies.</span>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
